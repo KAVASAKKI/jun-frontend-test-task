@@ -1,0 +1,56 @@
+.container {
+  width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.startBtn {
+  display: block;
+  max-width: 200px;
+  padding: 10px 40px;
+  margin: 0 auto;
+
+  color: white;
+  font-size: 20pt;
+  background-color: brown;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.startBtn:hover {
+  background-color: rgb(124, 33, 33);
+}
+.startBtn:hover::before {
+  left: 120%;
+  transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.startBtn::before {
+  position: absolute;
+  content: "";
+  background: rgba(255, 255, 255, 0.502);
+  width: 50px;
+  height: 155px;
+  left: -75px;
+  top: -50px;
+  opacity: 0.2;
+  z-index: 10;
+  transform: rotate(35deg);
+  transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.startBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.startBtn:disabled:hover {
+  background-color: brown;
+}
+.startBtn:disabled:hover::before {
+  display: none;
+}
