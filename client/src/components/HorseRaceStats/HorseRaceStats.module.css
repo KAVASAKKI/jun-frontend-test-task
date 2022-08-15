@@ -93,3 +93,18 @@
   color: crimson;
   border-color: crimson;
 }
+
+.notify {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  margin: 0 auto;
+
+  font-size: 150pt;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}

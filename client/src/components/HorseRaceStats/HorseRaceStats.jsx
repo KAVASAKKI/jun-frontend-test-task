@@ -1,23 +1,26 @@
 import cx from "classnames";
-import gsap from "gsap";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { useHorseRace } from "../../hooks";
+import { useHorseRace, useAnimation } from "../../hooks";
 import { HorseRaceStatsItem } from "./HorseRaceStatsItem";
 import { getIsStart, getStats, getBet, getIsFinish } from "../../redux/horseRace/selectors";
 import styles from "./HorseRaceStats.module.css";
 
 export const HorseRaceStats = () => {
+  const { notifyAnimation } = useAnimation();
   const { startRace, makeBet } = useHorseRace();
-  const bet = useSelector(getBet);
-  const stats = useSelector(getStats);
-  const isStart = useSelector(getIsStart);
   const isFinish = useSelector(getIsFinish);
+  const isStart = useSelector(getIsStart);
+  const stats = useSelector(getStats);
+  const bet = useSelector(getBet);
+  const winnerRef = useRef(null);
+  const loserRef = useRef(null);
 
   if (isFinish) {
     if (stats[0].name === bet) {
-      console.log("You won =)");
+      notifyAnimation(winnerRef);
     } else {
-      console.log("You lose =(");
+      notifyAnimation(loserRef);
     }
   }
 
@@ -54,6 +57,13 @@ export const HorseRaceStats = () => {
       <button className={styles.startBtn} onClick={startRace} disabled={!bet || isStart}>
         Start race
       </button>
+
+      <h3 className={styles.notify} style={{ color: "green" }} ref={winnerRef}>
+        You won!
+      </h3>
+      <h3 className={styles.notify} style={{ color: "red" }} ref={loserRef}>
+        You lose!
+      </h3>
     </div>
   );
 };
