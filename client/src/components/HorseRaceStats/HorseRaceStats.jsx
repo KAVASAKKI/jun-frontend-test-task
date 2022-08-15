@@ -53,11 +53,21 @@ export const HorseRaceStats = () => {
       {!isStart && betJSX}
       {bet && trackerJSX}
 
-      <button className={styles.startBtn} onClick={startRace} disabled={!bet || isStart}>
+      <button
+        className={styles.startBtn}
+        onClick={startRace}
+        disabled={!bet || isStart}
+        data-testid='button'
+      >
         Start race
       </button>
 
-      <h3 className={styles.notify} style={{ color: isWon ? "green" : "red" }} ref={ref}>
+      <h3
+        className={styles.notify}
+        style={{ color: isWon ? "green" : "red" }}
+        ref={ref}
+        data-testid='notify'
+      >
         {isWon ? "You won!" : "You lose!"}
       </h3>
     </div>
