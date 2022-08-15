@@ -11,26 +11,32 @@ const horses = [
   {
     name: "Princess Diana",
     distance: 0,
+    ftime: 0,
   },
   {
     name: "Cricket",
     distance: 0,
+    ftime: 0,
   },
   {
     name: "Rebel",
     distance: 0,
+    ftime: 0,
   },
   {
     name: "Lucy",
     distance: 0,
+    ftime: 0,
   },
   {
     name: "Lacey",
     distance: 0,
+    ftime: 0,
   },
   {
     name: "Ginger",
     distance: 0,
+    ftime: 0,
   },
 ];
 
@@ -44,9 +50,12 @@ function randomValue() {
 function getRound(socket) {
   const round = horses.map((horse) => {
     const currentDistance = (horse.distance += randomValue());
+    if (currentDistance >= maxDistance && !horse.ftime) {
+      horse.ftime = Date.now();
+    }
 
     return {
-      name: horse.name,
+      ...horse,
       distance: maxDistance < currentDistance ? maxDistance : currentDistance,
     };
   });
@@ -63,7 +72,10 @@ function trackTickers(socket) {
 
   socket.on("disconnect", function () {
     clearInterval(timer);
-    horses.map((horse) => (horse.distance = 0));
+    horses.map((horse) => {
+      horse.distance = 0;
+      horse.ftime = 0;
+    });
   });
 }
 
@@ -83,7 +95,10 @@ app.get("/", function (req, res) {
 
 socketServer.on("connection", (socket) => {
   socket.on("start", () => {
-    horses.map((horse) => (horse.distance = 0));
+    horses.map((horse) => {
+      horse.distance = 0;
+      horse.ftime = 0;
+    });
     trackTickers(socket);
   });
 });
