@@ -4,7 +4,8 @@ export const now = () => moment().toDate().getTime();
 
 export const pad = (value) => String(value).padStart(2, "0");
 
-export const getPrettifyCurrentDate = () => `${moment().format("L")} - ${moment().format("hh:mm:ss")}`;
+export const getPrettifyCurrentDate = () =>
+  `${moment().format("L")} - ${moment().format("hh:mm:ss")}`;
 
 export const getTimeComponents = (time) => {
   const dur = moment.duration(time, "milliseconds");

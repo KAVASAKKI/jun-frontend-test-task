@@ -2,6 +2,7 @@
   padding: 20px;
   margin-bottom: 15px;
 
+  color: white;
   background-color: var(--bg-color-primary);
 
   border: 1px solid gray;
@@ -9,7 +10,7 @@
 }
 
 .name {
-  color: white;
+  color: inherit;
   margin-top: 0px;
   margin-bottom: 35px;
 }
@@ -29,7 +30,7 @@
   background-color: crimson;
   border-radius: 5px;
 
-  transition: all 900ms linear;
+  transition: all 500ms linear;
 }
 
 .icon {
@@ -38,4 +39,9 @@
   bottom: 50%;
   font-size: 20pt;
   color: white;
+}
+
+.active {
+  color: crimson;
+  border-color: crimson;
 }

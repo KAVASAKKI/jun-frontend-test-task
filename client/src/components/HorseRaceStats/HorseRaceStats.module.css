@@ -54,3 +54,42 @@
 .startBtn:disabled:hover::before {
   display: none;
 }
+
+.title {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20pt;
+  text-align: center;
+}
+
+.horseList {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.horseItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 90px;
+  height: 150px;
+
+  color: white;
+  font-size: 14pt;
+  font-weight: 500;
+  text-align: center;
+  background-color: var(--bg-color-primary);
+
+  border-radius: 10px;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+}
+
+.active {
+  color: crimson;
+  border-color: crimson;
+}

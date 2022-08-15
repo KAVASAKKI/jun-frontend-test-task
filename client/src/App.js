@@ -1,10 +1,10 @@
-import { Header, HorseRacingStats } from "./components";
+import { Header, HorseRaceStats } from "./components";
 
 function App() {
   return (
     <>
       <Header />
-      <HorseRacingStats />
+      <HorseRaceStats />
     </>
   );
 }

@@ -1,6 +1,11 @@
 import cx from "classnames";
 import { useSelector } from "react-redux";
-import { getIsStart, getIsFinish, getStartTime, getRaceTime } from "../HorseRacingStats/redux/selectors";
+import {
+  getIsStart,
+  getIsFinish,
+  getStartTime,
+  getRaceTime,
+} from "../../redux/horseRace/selectors";
 import { getTimeComponents } from "../../utils/getTimeComponents";
 import styles from "./Header.module.css";
 
