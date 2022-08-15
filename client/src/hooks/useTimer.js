@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { batch, useDispatch } from "react-redux";
 import { updateRaceTime, setStartTime } from "../redux/horseRace/actions";
 import { now } from "../utils/getTimeComponents";
 
@@ -8,8 +8,10 @@ export const useTimer = () => {
   const timerRef = useRef(null);
 
   const startTimer = () => {
-    dispatch(updateRaceTime(0));
-    dispatch(setStartTime(now()));
+    batch(() => {
+      dispatch(updateRaceTime(0));
+      dispatch(setStartTime(now()));
+    });
 
     timerRef.current = setInterval(() => {
       dispatch(updateRaceTime(now()));
