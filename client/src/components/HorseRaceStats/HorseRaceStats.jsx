@@ -1,28 +1,27 @@
-import cx from "classnames";
-import { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import cx from "classnames";
 import { useHorseRace, useAnimation } from "../../hooks";
 import { HorseRaceStatsItem } from "./HorseRaceStatsItem";
 import { getIsStart, getStats, getBet, getIsFinish } from "../../redux/horseRace/selectors";
 import styles from "./HorseRaceStats.module.css";
 
 export const HorseRaceStats = () => {
+  const [isWon, setWon] = useState(false);
   const { notifyAnimation } = useAnimation();
   const { startRace, makeBet } = useHorseRace();
   const isFinish = useSelector(getIsFinish);
   const isStart = useSelector(getIsStart);
   const stats = useSelector(getStats);
   const bet = useSelector(getBet);
-  const winnerRef = useRef(null);
-  const loserRef = useRef(null);
+  const ref = useRef(null);
 
-  if (isFinish) {
-    if (stats[0].name === bet) {
-      notifyAnimation(winnerRef);
-    } else {
-      notifyAnimation(loserRef);
+  useEffect(() => {
+    if (isFinish) {
+      setWon(stats[0].name === bet);
+      notifyAnimation(ref);
     }
-  }
+  }, [bet, isFinish, notifyAnimation, stats]);
 
   // TODO: Нужно получить список всех лошадей, до начала забега. Но так как бекенд под это не настроeн, будем делать хардкод.
   const horses = ["Princess Diana", "Cricket", "Rebel", "Lucy", "Lacey", "Ginger"];
@@ -58,11 +57,8 @@ export const HorseRaceStats = () => {
         Start race
       </button>
 
-      <h3 className={styles.notify} style={{ color: "green" }} ref={winnerRef}>
-        You won!
-      </h3>
-      <h3 className={styles.notify} style={{ color: "red" }} ref={loserRef}>
-        You lose!
+      <h3 className={styles.notify} style={{ color: isWon ? "green" : "red" }} ref={ref}>
+        {isWon ? "You won!" : "You lose!"}
       </h3>
     </div>
   );

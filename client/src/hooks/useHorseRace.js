@@ -1,5 +1,5 @@
+import { batch, useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import { useDispatch, useSelector } from "react-redux";
 import { useTimer } from "./useTimer";
 import { updateStats, toggleIsFinish, toggleIsStart, setBet } from "../redux/horseRace/actions";
 import { getIsStart } from "../redux/horseRace/selectors";
@@ -14,8 +14,11 @@ export const useHorseRace = () => {
   const startRace = () => {
     if (isStart) return;
 
-    dispatch(toggleIsStart(true));
-    dispatch(toggleIsFinish(false));
+    batch(() => {
+      dispatch(toggleIsStart(true));
+      dispatch(toggleIsFinish(false));
+    });
+
     startTimer();
 
     socket.emit("start");
